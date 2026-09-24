@@ -3,6 +3,8 @@ import Image from 'next/image';
 import React from 'react';
 import logo from '@/assets/logo.png'
 
+
+
 const Navbar = () => {
     return (
 
@@ -26,12 +28,12 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 gap-2">
                         <li><a className='bg-[#1d2a16] text-lime-400 px-4 py-2 rounded-full text-sm font-medium'>Workouts</a></li>
                         <li><a className='text-[16px]'>My Plan</a></li>
                     </ul>
                 </div>
-                <div className="navbar-end gap-2">
+                <div className="navbar-end gap-6">
                     <button className="btn">Plan</button>
                     <button className="btn">Saved</button>
                 </div>
