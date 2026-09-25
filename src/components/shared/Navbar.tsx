@@ -1,14 +1,18 @@
 
+"use client";
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '@/assets/logo.png'
 
 
 
 const Navbar = () => {
+    const [plan, setPlan] = useState(0);
+    const [saved, setSaved] = useState(0);
+
     return (
 
-        <nav className='bg-base-200 shadow-sm'>
+        <nav className='bg-[#090a0c] border-b border-[#252830] shadow-sm'>
             <div className="navbar container mx-auto py-5 ">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -23,7 +27,9 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <Image src={logo} />
+                        <Image
+                         src={logo}
+                         alt='logoImage' />
                         <h2 className='text-[18px] font-bold'>FITLOG</h2>
                     </div>
                 </div>
@@ -34,8 +40,21 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-6">
-                    <button className="btn">Plan</button>
-                    <button className="btn">Saved</button>
+                    <button
+                     onClick={() => setPlan(plan+1)}
+                     
+                     className="btn "
+                     > Plan <span className="bg-lime-400 w-7 h-7 rounded-full flex items-center justify-center text-black font-bold text-[14px] ">{plan}</span>  
+
+                     </button>
+
+                    <button
+                     onClick={() => setSaved(saved+1)}
+                     
+                     className="btn"
+                     > Saved <span className="bg-black w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-[14px] border border-[#252830]">{plan}</span>
+                     
+                     </button>
                 </div>
             </div>
         </nav>
