@@ -7,12 +7,25 @@ import Link from 'next/link';
 import React, { useContext, useMemo, useState } from 'react';
 
 type TabKey = "today" | "saved";
+type SortKey = "duration" | "caloriesBurned" | "rating";
+
+const sortOptions: { label: string; value: SortKey }[] = [
+    { label: "Duration", value: "duration" },
+    { label: "Calories", value: "caloriesBurned" },
+    { label: "Rating", value: "rating" },
+];
 
 const ListedFits = () => {
     const { todayFits, laterlist, setTodayFits, setLaterFits } = useContext(FitsContext);
     const [activeTab, setActiveTab] = useState<TabKey>("today");
+    const [sortBy, setSortBy] = useState<SortKey>("duration");
 
     const activeList: IFit[] = activeTab === "today" ? todayFits : laterlist;
+
+    // Descending sort by whichever field is selected
+    const sortedList = useMemo(() => {
+        return [...activeList].sort((a, b) => b[sortBy] - a[sortBy]);
+    }, [activeList, sortBy]);
 
     const stats = useMemo(() => {
         return {
@@ -62,7 +75,7 @@ const ListedFits = () => {
                     </div>
                 </div>
 
-                {/* Tabs */}
+                {/* Tabs + Sort */}
                 <div className="mb-6 flex items-center justify-between">
                     <div className="flex gap-1 rounded-full bg-[#121212] p-1">
                         <button
@@ -86,12 +99,39 @@ const ListedFits = () => {
                             Saved
                         </button>
                     </div>
+
+                    {/* Sort By dropdown */}
+                    <div className="flex items-center gap-3 text-sm text-white/50">
+                        Sort By
+                        <div className="relative">
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value as SortKey)}
+                                className="appearance-none rounded-lg bg-[#121212] py-2 pl-3 pr-8 text-sm font-medium text-white outline-none ring-1 ring-white/10"
+                            >
+                                {sortOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40"
+                            >
+                                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
                 {/* List / Empty state */}
-                {activeList.length > 0 ? (
+                {sortedList.length > 0 ? (
                     <div className="flex flex-col gap-4">
-                        {activeList.map((fit) => (
+                        {sortedList.map((fit) => (
                             <PlanRow
                                 key={fit.id}
                                 fit={fit}
