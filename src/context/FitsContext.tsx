@@ -1,15 +1,27 @@
 "use client";
 
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { IFit } from '@/types/fits.type';
 
+interface IFitsContext {
+    todayFits: IFit[];
+    setTodayFits: Dispatch<SetStateAction<IFit[]>>;
+    laterlist: IFit[];
+    setLaterFits: Dispatch<SetStateAction<IFit[]>>;
+}
 
-export  const FitsContext = createContext({})
+export const FitsContext = createContext<IFitsContext>({
+    todayFits: [],
+    setTodayFits: () => {},
+    laterlist: [],
+    setLaterFits: () => {},
+});
 
-const FitsProvider = ({children}: {children: ReactNode}) => {
-    const [todayFits, setTodayFits] = useState([])
-    const [laterlist, setLaterFits] = useState([])
+const FitsProvider = ({ children }: { children: ReactNode }) => {
+    const [todayFits, setTodayFits] = useState<IFit[]>([]);
+    const [laterlist, setLaterFits] = useState<IFit[]>([]);
 
-    const sharedData = {
+    const sharedData: IFitsContext = {
         todayFits,
         setTodayFits,
         laterlist,

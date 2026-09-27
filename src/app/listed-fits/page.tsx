@@ -1,6 +1,6 @@
 "use client";
 
-import Fitcard from '@/components/shared/Fitcard';
+import PlanRow from '@/components/shared/PlanRow';
 import { FitsContext } from '@/context/FitsContext';
 import { IFit } from '@/types/fits.type';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import React, { useContext, useMemo, useState } from 'react';
 type TabKey = "today" | "saved";
 
 const ListedFits = () => {
-    const { todayFits, laterlist } = useContext(FitsContext);
+    const { todayFits, laterlist, setTodayFits, setLaterFits } = useContext(FitsContext);
     const [activeTab, setActiveTab] = useState<TabKey>("today");
 
     const activeList: IFit[] = activeTab === "today" ? todayFits : laterlist;
@@ -21,6 +21,18 @@ const ListedFits = () => {
             calories: activeList.reduce((sum, fit) => sum + fit.caloriesBurned, 0),
         };
     }, [activeList]);
+
+    const handleRemove = (id: number) => {
+        if (activeTab === "today") {
+            setTodayFits((prev) => prev.filter((fit) => fit.id !== id));
+        } else {
+            setLaterFits((prev) => prev.filter((fit) => fit.id !== id));
+        }
+    };
+
+    const handleMarkAsDone = (id: number) => {
+        handleRemove(id);
+    };
 
     return (
         <div className="min-h-screen bg-black px-4 py-10 text-white">
@@ -78,9 +90,14 @@ const ListedFits = () => {
 
                 {/* List / Empty state */}
                 {activeList.length > 0 ? (
-                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="flex flex-col gap-4">
                         {activeList.map((fit) => (
-                            <Fitcard key={fit.id} fit={fit} />
+                            <PlanRow
+                                key={fit.id}
+                                fit={fit}
+                                onDone={handleMarkAsDone}
+                                onRemove={handleRemove}
+                            />
                         ))}
                     </div>
                 ) : (
