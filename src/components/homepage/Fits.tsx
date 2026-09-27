@@ -3,9 +3,15 @@ import Fitcard from "../shared/Fitcard";
 import { IFit } from "@/types/fits.type";
 
 const getFits = async () => {
-    const response = await fetch("http://localhost:3000/fitsData.json");
-    const data = await response.json();
-    return data;
+    try{
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/fitsData.json`);
+        const data = await response.json();
+        return data;
+    }catch(error){
+        console.error("Error fetching fits data",error);
+        return[];
+    }
 };
 
 const Fits = async () => {
@@ -30,8 +36,8 @@ const Fits = async () => {
 
                 {fitsData.map((fit: IFit, ind: number) => {
 
-                        return <Fitcard key={ind} fit={fit} />
-                    
+                    return <Fitcard key={ind} fit={fit} />
+
                 })}
 
             </div>

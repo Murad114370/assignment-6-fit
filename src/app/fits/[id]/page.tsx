@@ -7,14 +7,19 @@ import TodayButton from '@/components/fitDetails/TodayButton';
 import LaterListButton from '@/components/fitDetails/LaterListButton';
 
 const getFit = async (id: string): Promise<IFit | undefined> => {
-    const response = await fetch("http://localhost:3000/fitsData.json");
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/fitsData.json`);
 
-    if (!response.ok) {
-        throw new Error(`Failed to fetch fits data: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch fits data: ${response.status}`);
+        }
+
+        const data: IFit[] = await response.json();
+        return data.find((fit) => String(fit.id) === id);
+    } catch (error) {
+        console.error("Error fetching fit data", error);
+        return undefined;
     }
-
-    const data: IFit[] = await response.json();
-    return data.find((fit) => String(fit.id) === id);
 };
 
 const detailRows = (fit: IFit) => [
