@@ -104,6 +104,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
                     <div className="mt-8 flex flex-wrap gap-3">
                         <TodayButton fit={fit} />
+                        
 
                         <LaterListButton fit={fit} />
                     </div>
