@@ -4,6 +4,7 @@
 import { FitsContext } from '@/context/FitsContext';
 import { IFit } from '@/types/fits.type';
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 const LaterListButton = ({fit}: {fit: IFit}) => {
 
@@ -16,7 +17,7 @@ const LaterListButton = ({fit}: {fit: IFit}) => {
         console.log('later list fit btn triggered', fit);
 
         setLaterFits([...laterlist, fit])
-        alert(`You have added save for later "${fit.name}"`)
+        toast.success(`You have added"${fit.name}" save of later`)
     }
 
     return (

@@ -4,6 +4,7 @@
 import { FitsContext } from '@/context/FitsContext';
 import { IFit } from '@/types/fits.type';
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 const TodayButton = ({fit}: {fit: IFit}) => {
 
@@ -16,7 +17,7 @@ const TodayButton = ({fit}: {fit: IFit}) => {
         console.log('today fit btn triggered', fit);
 
         setTodayFits([...todayFits, fit])
-        alert(`You have read "${fit.name}"`)
+        toast.success(`You have added "${fit.name}" today's plan`)
     }
 
     return (
