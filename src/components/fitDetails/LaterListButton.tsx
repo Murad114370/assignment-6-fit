@@ -16,7 +16,7 @@ const LaterListButton = ({fit}: {fit: IFit}) => {
         console.log('later list fit btn triggered', fit);
 
         setLaterFits([...laterlist, fit])
-        alert(`You have save for later "${fit.name}"`)
+        alert(`You have added save for later "${fit.name}"`)
     }
 
     return (
