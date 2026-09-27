@@ -1,8 +1,8 @@
-# FitLog
+# FitLog:
 
 FitLog is a workout library and planning app built with Next.js. Browse a catalog of exercises, dive into details for each lift, and build a daily workout plan by adding exercises to "Today's Plan" or saving them for later.
 
-## Technologies Used
+## Technologies Used:
 
 - **Next.js** (App Router) — routing, server components, dynamic pages
 - **TypeScript** — type-safe components and data models
@@ -10,7 +10,7 @@ FitLog is a workout library and planning app built with Next.js. Browse a catalo
 - **React Context API** — global state for today's plan and saved list
 - **react-toastify** — toast notifications for user actions
 
-## Key Features
+## Key Features:
 
 1. **Workout Library** — Browse a grid of exercise cards, each showing muscle groups, equipment, duration, calories burned, and rating at a glance.
 2. **Exercise Details Page** — Click any card to view a full breakdown: description, equipment, difficulty, sets, reps, duration, calories, rating, and step-by-step instructions.
