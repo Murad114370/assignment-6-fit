@@ -1,7 +1,10 @@
+
 import Image from 'next/image';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { IFit } from '@/types/fits.type';
+import TodayButton from '@/components/fitDetails/TodayButton';
+import LaterListButton from '@/components/fitDetails/LaterListButton';
 
 const getFit = async (id: string): Promise<IFit | undefined> => {
     const response = await fetch("http://localhost:3000/fitsData.json");
@@ -28,6 +31,7 @@ const detailRows = (fit: IFit) => [
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
     const fit = await getFit(id);
+    // console.log(fit);
 
     if (!fit) {
         notFound();
@@ -99,12 +103,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                     </div>
 
                     <div className="mt-8 flex flex-wrap gap-3">
-                        <button className="rounded-xl bg-lime-300 px-5 py-3 text-sm font-bold text-black transition hover:bg-lime-400">
-                            ⚡ Add to today&apos;s plan
-                        </button>
-                        <button className="rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/5">
-                            🔖 Save for later
-                        </button>
+                        <TodayButton fit={fit} />
+
+                        <LaterListButton fit={fit} />
                     </div>
                 </div>
             </div>

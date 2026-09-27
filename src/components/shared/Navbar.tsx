@@ -38,7 +38,7 @@ const Navbar = () => {
                         Workouts
                     </Link>
                     <Link
-                        href="/my-plan"
+                        href="/listed-fits"
                         className={
                             pathname === "/my-plan"
                                 ? "text-lime-400"

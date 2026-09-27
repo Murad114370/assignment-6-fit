@@ -1,7 +1,10 @@
+"use client";
+import { FitsContext } from '@/context/FitsContext';
+import React, { useContext } from 'react';
 
-import React from 'react';
-
-const page = () => {
+const ListedFits = () => {
+    const {todayFits, laterlist} = useContext(FitsContext)
+    console.log(todayFits,laterlist ,"todayFits", "laterlist");
     return (
         <div>
             Listed Fits
@@ -9,4 +12,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default ListedFits;
