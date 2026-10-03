@@ -6,19 +6,25 @@ import { IFit } from '@/types/fits.type';
 import TodayButton from '@/components/fitDetails/TodayButton';
 import LaterListButton from '@/components/fitDetails/LaterListButton';
 
-const getFit = async (id: string): Promise<IFit | undefined> => {
+const getFit = async (id: string): Promise<IFit> => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/fitsData.json`);
+        const response = await fetch(`https://api.abcz.workers.dev/api/fitlog`);
 
         if (!response.ok) {
             throw new Error(`Failed to fetch fits data: ${response.status}`);
         }
 
         const data: IFit[] = await response.json();
-        return data.find((fit) => String(fit.id) === id);
+        const fit = data.find((item) => String(item.id) === id);
+
+        if (!fit) {
+            notFound();
+        }
+
+        return fit;
     } catch (error) {
         console.error("Error fetching fit data", error);
-        return undefined;
+        notFound();
     }
 };
 

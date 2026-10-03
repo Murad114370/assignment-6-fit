@@ -5,7 +5,7 @@ import { IFit } from "@/types/fits.type";
 const getFits = async () => {
     try{
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/fitsData.json`);
+        const response = await fetch(`https://api.abcz.workers.dev/api/fitlog`);
         const data = await response.json();
         return data;
     }catch(error){
