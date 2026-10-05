@@ -25,7 +25,7 @@ const TodayButton = ({ fit }: { fit: IFit }) => {
             className="rounded-xl bg-lime-300 px-5 py-3 text-sm font-bold text-black transition hover:bg-lime-400"
             onClick={handleTodayFit}
         >
-            ⚡ Add to today&apos;s plan
+             Add to today&apos;s plan
         </button>
     );
 };

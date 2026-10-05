@@ -25,7 +25,7 @@ const LaterListButton = ({ fit }: { fit: IFit }) => {
             className="rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/5"
             onClick={handleAddToLaterList}
         >
-            🔖 Save for later
+             Save for later
         </button>
     );
 };
